@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { jobs } from '@/lib/db/schema';
 
 export async function GET() {
   try {
-    // Test database connection
-    await db.$count('jobs');
+    // Test database connection with a simple query
+    await db.select().from(jobs).limit(1);
     
     return NextResponse.json({
       status: 'healthy',
